@@ -42,7 +42,7 @@ public class NotaService implements IService<Nota, Long> {
         Nota notaSalva = this.notaRepository.findOne(id);
 
         if (notaSalva != null) {
-            this.notaRepository.save(nota);
+            notaResultado = this.notaRepository.save(nota);
         }
         return notaResultado;
     }
