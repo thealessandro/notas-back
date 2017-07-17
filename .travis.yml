@@ -6,6 +6,6 @@ services:
 
 before_script:
   - psql -c 'CREATE DATABASE notas_testdb;' -U postgres
-  - psql -c 'ALTER USER postgres WITH PASSWORD '123456';' -U postgres
+  - psql -c "ALTER USER postgres WITH PASSWORD '123456';" -U postgres
 
 script: gradle test
