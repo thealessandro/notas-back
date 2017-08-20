@@ -6,13 +6,14 @@ import org.springframework.data.domain.Pageable;
 /**
  * Created by alessandro on 29/06/17.
  */
+
 public interface IRestController<T, PK> {
 
     T save(T t);
 
     T update(T t);
 
-    void delete(PK id);
+    Boolean delete(PK id);
 
     T findById(PK id);
 

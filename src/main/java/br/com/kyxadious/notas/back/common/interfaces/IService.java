@@ -15,7 +15,7 @@ public interface IService<T, PK> {
 
     T update(T t);
 
-    void delete(PK id);
+    Boolean delete(PK id);
 
     T findById(PK id);
 
