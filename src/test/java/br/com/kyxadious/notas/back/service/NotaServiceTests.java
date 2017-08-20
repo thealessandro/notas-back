@@ -1,6 +1,6 @@
 package br.com.kyxadious.notas.back.service;
 
-import br.com.kyxadious.notas.back.entity.Nota;
+import br.com.kyxadious.notas.back.domain.Nota;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

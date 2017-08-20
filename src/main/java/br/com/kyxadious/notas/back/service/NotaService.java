@@ -1,7 +1,7 @@
 package br.com.kyxadious.notas.back.service;
 
 import br.com.kyxadious.notas.back.common.interfaces.IService;
-import br.com.kyxadious.notas.back.entity.Nota;
+import br.com.kyxadious.notas.back.domain.Nota;
 import br.com.kyxadious.notas.back.repository.NotaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -29,7 +30,8 @@ public class NotaService implements IService<Nota, Long> {
     public Nota save(Nota nota) {
         Nota notaResultado = null;
 
-        if (nota != null) {
+        if (nota != null && nota.getId() == null) {
+            nota.setDataCadastro(Calendar.getInstance().getTime());
             notaResultado = this.notaRepository.save(nota);
         }
         return notaResultado;
@@ -38,18 +40,22 @@ public class NotaService implements IService<Nota, Long> {
     @Override
     public Nota update(Nota nota) {
         Nota notaResultado = null;
-        Long id = (nota != null) ? nota.getId() : 0L;
+        Long id = ((nota != null) ? ((nota.getId() != null) ? nota.getId() : 0L) : 0L);
         Nota notaSalva = this.notaRepository.findOne(id);
 
         if (notaSalva != null) {
+            nota.setDataEdicao(Calendar.getInstance().getTime());
             notaResultado = this.notaRepository.save(nota);
         }
         return notaResultado;
     }
 
     @Override
-    public void delete(Long id) {
+    public Boolean delete(Long id) {
+        id = (id != null) ? id : 0L;
         this.notaRepository.delete(id);
+        Nota nota = this.notaRepository.findOne(id);
+        return nota == null;
     }
 
     @Override

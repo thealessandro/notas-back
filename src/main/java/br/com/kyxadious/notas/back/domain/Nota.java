@@ -1,4 +1,7 @@
-package br.com.kyxadious.notas.back.entity;
+package br.com.kyxadious.notas.back.domain;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,8 +19,14 @@ public class Nota implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonProperty("data_cadastro")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "America/Fortaleza")
     private Date dataCadastro;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonProperty("data_edicao")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "America/Fortaleza")
     private Date dataEdicao;
 
     private String texto;
