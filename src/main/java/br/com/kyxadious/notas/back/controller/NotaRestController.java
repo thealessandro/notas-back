@@ -1,6 +1,6 @@
 package br.com.kyxadious.notas.back.controller;
 
-import br.com.kyxadious.notas.back.common.interfaces.IRestController;
+import br.com.kyxadious.notas.back.commons.interfaces.IRestController;
 import br.com.kyxadious.notas.back.domain.Nota;
 import br.com.kyxadious.notas.back.service.NotaService;
 import io.swagger.annotations.ApiImplicitParam;
@@ -35,8 +35,8 @@ public class NotaRestController implements IRestController<Nota, Long> {
 
     @DeleteMapping("/{nota-id}")
     @Override
-    public Boolean delete(@PathVariable("nota-id") Long id) {
-        return this.notaService.delete(id);
+    public void delete(@PathVariable("nota-id") Long id) {
+        this.notaService.delete(id);
     }
 
     @GetMapping("/{nota-id}")

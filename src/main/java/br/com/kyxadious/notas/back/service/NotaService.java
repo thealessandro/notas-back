@@ -1,6 +1,6 @@
 package br.com.kyxadious.notas.back.service;
 
-import br.com.kyxadious.notas.back.common.interfaces.IService;
+import br.com.kyxadious.notas.back.commons.interfaces.IService;
 import br.com.kyxadious.notas.back.domain.Nota;
 import br.com.kyxadious.notas.back.repository.NotaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,6 @@ import java.util.List;
 @Transactional
 public class NotaService implements IService<Nota, Long> {
 
-    private static final int PAGE_SIZE = 100;
-
     @Autowired
     private NotaRepository notaRepository;
 
@@ -40,10 +38,8 @@ public class NotaService implements IService<Nota, Long> {
     @Override
     public Nota update(Nota nota) {
         Nota notaResultado = null;
-        Long id = ((nota != null) ? ((nota.getId() != null) ? nota.getId() : 0L) : 0L);
-        Nota notaSalva = this.notaRepository.findOne(id);
 
-        if (notaSalva != null) {
+        if (nota != null && nota.getId() != null) {
             nota.setDataEdicao(Calendar.getInstance().getTime());
             notaResultado = this.notaRepository.save(nota);
         }
@@ -51,15 +47,14 @@ public class NotaService implements IService<Nota, Long> {
     }
 
     @Override
-    public Boolean delete(Long id) {
+    public void delete(Long id) {
         id = (id != null) ? id : 0L;
         this.notaRepository.delete(id);
-        Nota nota = this.notaRepository.findOne(id);
-        return nota == null;
     }
 
     @Override
     public Nota findById(Long id) {
+        id = (id != null) ? id : 0L;
         return this.notaRepository.findOne(id);
     }
 
@@ -70,8 +65,6 @@ public class NotaService implements IService<Nota, Long> {
 
     @Override
     public Page<Nota> findAll(Pageable pageable) {
-        Pageable pageRequest = new PageRequest(pageable.getPageNumber(),
-                (pageable.getPageSize() <= PAGE_SIZE) ? pageable.getPageSize() : PAGE_SIZE);
-        return this.notaRepository.findAll(pageRequest);
+        return this.notaRepository.findAll(pageable);
     }
 }
