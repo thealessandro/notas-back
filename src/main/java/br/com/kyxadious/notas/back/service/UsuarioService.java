@@ -1,6 +1,6 @@
 package br.com.kyxadious.notas.back.service;
 
-import br.com.kyxadious.notas.back.commons.interfaces.IService;
+import br.com.kyxadious.notas.back.common.interfaces.IService;
 import br.com.kyxadious.notas.back.domain.Usuario;
 import br.com.kyxadious.notas.back.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;

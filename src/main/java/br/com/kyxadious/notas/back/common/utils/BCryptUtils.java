@@ -1,4 +1,4 @@
-package br.com.kyxadious.notas.back.commons.utils;
+package br.com.kyxadious.notas.back.common.utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,6 +1,6 @@
 package br.com.kyxadious.notas.back.controller;
 
-import br.com.kyxadious.notas.back.commons.interfaces.IRestController;
+import br.com.kyxadious.notas.back.common.interfaces.IRestController;
 import br.com.kyxadious.notas.back.domain.Nota;
 import br.com.kyxadious.notas.back.service.NotaService;
 import io.swagger.annotations.ApiImplicitParam;
