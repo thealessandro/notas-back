@@ -23,7 +23,11 @@ public class BCryptUtils {
 
         BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder(LOG_ROUNDS);
         String hash = bCrypt.encode(senha);
-        LOG.debug("Hash da senha gerado com BCrypt: " + hash);
         return hash;
+    }
+
+    public static Boolean senhaValida(String senha, String hash) {
+        BCryptPasswordEncoder bCrypt = new BCryptPasswordEncoder(LOG_ROUNDS);
+        return bCrypt.matches(senha, hash);
     }
 }

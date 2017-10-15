@@ -3,7 +3,7 @@ package br.com.kyxadious.notas.back.common.utils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.*;
@@ -14,16 +14,15 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@ActiveProfiles("test")
 public class BCryptUtilsTests {
-
-    private final BCryptPasswordEncoder bCryptEncoder = new BCryptPasswordEncoder();
 
     @Test
     public void testGerarHash() {
         String senha = "123456";
         String hash = BCryptUtils.gerarHashBCrypt(senha);
 
-        assertTrue(bCryptEncoder.matches(senha, hash));
+        assertTrue(BCryptUtils.senhaValida(senha, hash));
     }
 
     @Test
@@ -32,7 +31,7 @@ public class BCryptUtilsTests {
         String senhaErrada = "654321";
         String hash = BCryptUtils.gerarHashBCrypt(senha);
 
-        assertFalse(bCryptEncoder.matches(senhaErrada, hash));
+        assertFalse(BCryptUtils.senhaValida(senhaErrada, hash));
     }
 
     @Test
