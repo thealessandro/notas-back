@@ -12,14 +12,9 @@ import java.util.List;
 public interface IService<T, PK> {
 
     T save(T t);
-
     T update(T t);
-
-    Boolean delete(PK id);
-
+    void delete(PK id);
     T findById(PK id);
-
     List<T> findAll();
-
     Page<T> findAll(Pageable pageable);
 }

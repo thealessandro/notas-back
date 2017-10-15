@@ -16,7 +16,7 @@ import java.util.Date;
 public class Nota implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)

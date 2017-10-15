@@ -28,28 +28,29 @@ public class NotaServiceTests {
 
     @Test
     @Transactional
-    public void salvarNota() {
+    public void testSalvarNota() {
         Nota nota = new Nota();
         nota.setTexto("Nota de teste");
         nota.setCor("#FF0000");
         nota.setDataCadastro(Calendar.getInstance().getTime());
-
         Nota notaSalva = this.notaService.save(nota);
+
         assertNotNull(notaSalva);
     }
 
     @Test
     @Transactional
-    public void buscarNota() {
+    public void testBuscarNota() {
         Nota nota = new Nota();
         nota.setTexto("Nota de teste");
         nota.setCor("#FF0000");
         nota.setDataCadastro(Calendar.getInstance().getTime());
-
         Nota notaSalva = this.notaService.save(nota);
+
         assertNotNull(notaSalva);
 
         Nota notaEncontrada = this.notaService.findById(notaSalva.getId());
+
         assertNotNull(notaEncontrada);
         assertEquals(nota.getTexto(), notaEncontrada.getTexto());
         assertEquals(nota.getCor(), notaEncontrada.getCor());
@@ -57,51 +58,54 @@ public class NotaServiceTests {
 
     @Test
     @Transactional
-    public void buscarNotas() {
+    public void testBuscarNotas() {
         Nota nota = new Nota();
         nota.setTexto("Nota de teste");
         nota.setCor("#FF0000");
         nota.setDataCadastro(Calendar.getInstance().getTime());
-
         Nota notaSalva = this.notaService.save(nota);
+
         assertNotNull(notaSalva);
 
         List<Nota> notas = this.notaService.findAll();
+
         assertNotNull(notas);
         assertTrue(notas.size() > 0);
     }
 
     @Test
     @Transactional
-    public void atualizarNota() {
+    public void testAtualizarNota() {
         Nota nota = new Nota();
         nota.setTexto("Nota de teste");
         nota.setCor("#FF0000");
         nota.setDataCadastro(Calendar.getInstance().getTime());
-
         Nota notaSalva = this.notaService.save(nota);
+
         assertNotNull(notaSalva);
 
         notaSalva.setTexto("Notas é um bom app!");
+
         Nota notaAtualizada = this.notaService.update(notaSalva);
+
         assertNotNull(notaAtualizada);
         assertEquals("Notas é um bom app!", notaAtualizada.getTexto());
     }
 
     @Test
     @Transactional
-    public void excluirNotas() {
+    public void testExcluirNotas() {
         Nota nota = new Nota();
         nota.setTexto("Nota de teste");
         nota.setCor("#FF0000");
         nota.setDataCadastro(Calendar.getInstance().getTime());
-
         Nota notaSalva = this.notaService.save(nota);
+
         assertNotNull(notaSalva);
 
         this.notaService.delete(notaSalva.getId());
-
         Nota notaEncontrada = this.notaService.findById(notaSalva.getId());
+
         assertNull(notaEncontrada);
     }
 }

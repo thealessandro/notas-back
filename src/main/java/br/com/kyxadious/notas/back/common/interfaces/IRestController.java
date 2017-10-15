@@ -10,12 +10,8 @@ import org.springframework.data.domain.Pageable;
 public interface IRestController<T, PK> {
 
     T save(T t);
-
     T update(T t);
-
-    Boolean delete(PK id);
-
+    void delete(PK id);
     T findById(PK id);
-
     Page<T> findAll(Pageable pageable);
 }

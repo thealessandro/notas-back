@@ -35,8 +35,8 @@ public class NotaRestController implements IRestController<Nota, Long> {
 
     @DeleteMapping("/{nota-id}")
     @Override
-    public Boolean delete(@PathVariable("nota-id") Long id) {
-        return this.notaService.delete(id);
+    public void delete(@PathVariable("nota-id") Long id) {
+        this.notaService.delete(id);
     }
 
     @GetMapping("/{nota-id}")
