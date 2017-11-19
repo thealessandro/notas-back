@@ -1,24 +1,22 @@
 package br.com.kyxadious.notas.back.dto;
 
+import io.swagger.annotations.ApiParam;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class UsuarioDto {
 
     private Long id;
 
     @NotEmpty(message = "Username não pode ser vazio.")
-    @Length(min = 8, max = 20, message = "Username deve conter entre 8 e 20 caracteres.")
+    @Length(min = 5, max = 20, message = "Username deve conter entre 5 e 20 caracteres.")
+    @ApiParam(value = "Username", required = true)
     private String username;
 
     @NotEmpty(message = "Password não pode ser vazio.")
     @Length(min = 6, max = 10, message = "Password deve conter entre 6 e 10 caracteres.")
+    @ApiParam(value = "Password", required = true)
     private String password;
-
-    private Set<NotaDto> notas = new HashSet<>();
 
     public UsuarioDto() {
     }
@@ -45,13 +43,5 @@ public class UsuarioDto {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Set<NotaDto> getNotas() {
-        return notas;
-    }
-
-    public void setNotas(Set<NotaDto> notas) {
-        this.notas = notas;
     }
 }
