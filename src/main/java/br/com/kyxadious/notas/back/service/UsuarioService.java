@@ -56,7 +56,10 @@ public class UsuarioService implements IService<Usuario, Long> {
     @Override
     public void delete(Long id) {
         id = (id != null) ? id : 0L;
-        this.usuarioRepository.delete(id);
+
+        if (Objects.nonNull(findById(id))) {
+            this.usuarioRepository.delete(id);
+        }
     }
 
     public void deleteAll() {

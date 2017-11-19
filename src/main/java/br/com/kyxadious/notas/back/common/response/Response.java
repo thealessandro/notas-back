@@ -7,7 +7,7 @@ public class Response<T> {
 
     private Integer status;
     private Set<String> messages = new HashSet<>();
-    private T content;
+    private T result;
 
     public Response() {
     }
@@ -28,11 +28,11 @@ public class Response<T> {
         this.messages = messages;
     }
 
-    public T getContent() {
-        return content;
+    public T getResult() {
+        return result;
     }
 
-    public void setContent(T content) {
-        this.content = content;
+    public void setResult(T result) {
+        this.result = result;
     }
 }
