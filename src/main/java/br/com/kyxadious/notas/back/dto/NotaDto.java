@@ -1,44 +1,33 @@
-package br.com.kyxadious.notas.back.domain;
+package br.com.kyxadious.notas.back.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
-/**
- * Created by alessandro on 29/06/17.
- */
+public class NotaDto {
 
-@Entity
-@Table(name = "nota")
-public class Nota implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty("data_cadastro")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "America/Fortaleza")
     private Date dataCadastro;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty("data_edicao")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "America/Fortaleza")
     private Date dataEdicao;
 
+    @NotEmpty(message = "Título não pode ser vazio.")
     private String titulo;
 
+    @NotEmpty(message = "Texto não pode ser vazio.")
     private String texto;
 
+    @NotEmpty(message = "Cor não pode ser vazio.")
     private String cor;
 
-    @ManyToOne
-    private Usuario usuario;
-
-    public Nota() {
+    public NotaDto() {
     }
 
     public Long getId() {
@@ -87,13 +76,5 @@ public class Nota implements Serializable {
 
     public void setCor(String cor) {
         this.cor = cor;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 }

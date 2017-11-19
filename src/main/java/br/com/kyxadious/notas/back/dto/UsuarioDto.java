@@ -1,32 +1,26 @@
-package br.com.kyxadious.notas.back.domain;
+package br.com.kyxadious.notas.back.dto;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by alessandro on 14/10/17.
- */
+public class UsuarioDto {
 
-@Entity
-@Table(name = "usuario")
-public class Usuario implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(unique = true, nullable = false)
+    @NotEmpty(message = "Username não pode ser vazio.")
+    @Length(min = 8, max = 20, message = "Username deve conter entre 8 e 20 caracteres.")
     private String username;
 
-    @Column(nullable = false)
+    @NotEmpty(message = "Password não pode ser vazio.")
+    @Length(min = 6, max = 10, message = "Password deve conter entre 6 e 10 caracteres.")
     private String password;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
-    private Set<Nota> notas = new HashSet<>();
+    private Set<NotaDto> notas = new HashSet<>();
 
-    public Usuario() {
+    public UsuarioDto() {
     }
 
     public Long getId() {
@@ -53,11 +47,11 @@ public class Usuario implements Serializable {
         this.password = password;
     }
 
-    public Set<Nota> getNotas() {
+    public Set<NotaDto> getNotas() {
         return notas;
     }
 
-    public void setNotas(Set<Nota> notas) {
+    public void setNotas(Set<NotaDto> notas) {
         this.notas = notas;
     }
 }

@@ -20,23 +20,23 @@ public class BCryptUtilsTests {
     @Test
     public void testGerarHash() {
         String senha = "123456";
-        String hash = BCryptUtils.gerarHashBCrypt(senha);
+        String hash = BCryptUtils.generateHash(senha);
 
-        assertTrue(BCryptUtils.senhaValida(senha, hash));
+        assertTrue(BCryptUtils.isValid(senha, hash));
     }
 
     @Test
     public void testGerarHashComSenhaErrada() {
         String senha = "123456";
         String senhaErrada = "654321";
-        String hash = BCryptUtils.gerarHashBCrypt(senha);
+        String hash = BCryptUtils.generateHash(senha);
 
-        assertFalse(BCryptUtils.senhaValida(senhaErrada, hash));
+        assertFalse(BCryptUtils.isValid(senhaErrada, hash));
     }
 
     @Test
     public void testGerarHashComSenhaNuka() {
-        String hash = BCryptUtils.gerarHashBCrypt(null);
+        String hash = BCryptUtils.generateHash(null);
 
         assertNull(hash);
     }

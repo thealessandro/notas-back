@@ -1,14 +1,17 @@
 package br.com.kyxadious.notas.back.service;
 
 import br.com.kyxadious.notas.back.common.interfaces.IService;
+import br.com.kyxadious.notas.back.common.utils.BCryptUtils;
 import br.com.kyxadious.notas.back.domain.Usuario;
 import br.com.kyxadious.notas.back.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by alessandro on 15/10/17.
@@ -25,6 +28,13 @@ public class UsuarioService implements IService<Usuario, Long> {
         Usuario usuarioResultado = null;
 
         if (usuario != null && usuario.getId() == null) {
+            if (StringUtils.isEmpty(usuario.getUsername()) || StringUtils.isEmpty(usuario.getPassword()))
+                return null;
+
+            if (Objects.nonNull(this.usuarioRepository.findByUsername(usuario.getUsername())))
+                return null;
+
+            usuario.setPassword(BCryptUtils.generateHash(usuario.getPassword()));
             usuarioResultado = this.usuarioRepository.save(usuario);
         }
         return usuarioResultado;
@@ -35,6 +45,9 @@ public class UsuarioService implements IService<Usuario, Long> {
         Usuario usuarioResultado = null;
 
         if (usuario != null && usuario.getId() != null) {
+            if (StringUtils.isEmpty(usuario.getUsername()) || StringUtils.isEmpty(usuario.getPassword()))
+                return null;
+
             usuarioResultado = this.usuarioRepository.save(usuario);
         }
         return usuarioResultado;
@@ -57,6 +70,9 @@ public class UsuarioService implements IService<Usuario, Long> {
     }
 
     public Usuario findByUsername(String username) {
+        if (StringUtils.isEmpty(username))
+            return null;
+
         return this.usuarioRepository.findByUsername(username);
     }
 
